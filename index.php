@@ -1,14 +1,14 @@
 <?php
+require_once "vendor/autoload.php";
 
 use app\core\Application;
-
-require_once "core/Application.php";
+use app\core\Router;
 
 
 $app = new Application();
 
 
-
+$router = new Router();
 
 
 
