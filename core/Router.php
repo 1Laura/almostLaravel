@@ -86,7 +86,15 @@ class Router
 
     public function renderView(string $view)
     {
-        include_once __DIR__ . "/../view/$view.php";
+
+//        include_once __DIR__ . "/../view/$view.php";
+        include_once Application::$ROOT_DIR . "/view/$view.php";
     }
+
+    protected function layoutContent()
+    {
+        include_once Application::$ROOT_DIR . "/view/layout/main.php";
+    }
+
 
 }
