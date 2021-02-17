@@ -58,10 +58,11 @@ class Router
     {
         $path = $this->request->getPath();
         $method = $this->request->getMethod();
-
-        var_dump($this->routes);
-        var_dump($path);
-        var_dump($method);
+//
+//        var_dump($this->routes);
+//        exit();
+//        var_dump($path);
+//        var_dump($method);
 
         //trying to run a route from routes array
         $callback = $this->routes[$method][$path] ?? false;
@@ -72,9 +73,20 @@ class Router
             die();
         endif;
 
+        //if our callback value is string
+        //$app->router->get('/about','about);
+        if (is_string($callback)) :
+            return $this->renderView($callback);
+        endif;
+
         // page does exist we call user function
 
-        echo call_user_func($callback);
+        return call_user_func($callback);
+    }
+
+    public function renderView(string $view)
+    {
+        include_once __DIR__ . "/../view/$view.php";
     }
 
 }
