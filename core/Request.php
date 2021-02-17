@@ -18,9 +18,14 @@ class Request
 
     public function getPath()
     {
-        $path = $_SERVER['REQUEST_URI'] ?? '/lara/';
+        $path = $_SERVER['REQUEST_URI'] ?? '/';//nukreipiamas i home page
+
         $questionPosition = strpos($path, '?');
-        var_dump($questionPosition);
+
+        if ($questionPosition !== false) :
+            $path = substr($path, 0, $questionPosition);
+        endif;
+        return $path;
     }
 
 }
