@@ -32,4 +32,14 @@ class Request
         return $path;
     }
 
+    /**
+     * This
+     *
+     * @return string
+     */
+    public function getMethod()
+    {
+        return strtolower($_SERVER['REQUEST_METHOD']);
+    }
+
 }
