@@ -1,0 +1,17 @@
+{
+  "name": "lenovo/lara",
+  "description": "Almost lara mvc learning",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Laura Baltrukonė",
+      "email": "baltrukone@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "app\\": "./"
+    }
+  },
+  "require": {}
+}
