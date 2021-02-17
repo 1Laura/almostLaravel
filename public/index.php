@@ -10,9 +10,7 @@ $app->router->get('/', function () {
     return "this is home page";
 });
 
-//
-$app->router->get('/about', function () {
-    return "this is about page";
-});
+$app->router->get('/about', 'about');
+
 
 $app->run();
