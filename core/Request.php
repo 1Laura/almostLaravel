@@ -5,10 +5,6 @@ namespace app\core;
 
 
 /**
- * Get user page from uri
- *
- * 'REQUEST_URI' => string '/lara/about/add?id=5'
- * extract/add
  *
  * Class Request
  * @package app\core
@@ -16,7 +12,15 @@ namespace app\core;
 class Request
 {
 
-    public function getPath()
+    /**
+     * Get user page from uri
+     *
+     * 'REQUEST_URI' => string '/lara/about/add?id=5'
+     * extract/add
+     *
+     * @return string
+     */
+    public function getPath(): string
     {
         $path = $_SERVER['REQUEST_URI'] ?? '/';//nukreipiamas i home page
 
