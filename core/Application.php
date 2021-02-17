@@ -22,11 +22,13 @@ class Application
      * @var Router
      */
     public Router $router;
+    public Request $request;
 
     public function __construct()
     {
 //        echo "This is Application constructor";
-        $this->router = new Router();
+        $this->request = new Request();
+        $this->router = new Router($this->request);
     }
 
 

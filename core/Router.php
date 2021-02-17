@@ -31,11 +31,14 @@ class Router
      * @var array
      */
     protected array $routes = [];
+    public Request $request;
 
 
-    public function __construct()
+    public function __construct($request)
     {
+        $this->request = $request;
         echo "This is Router constructor" . PHP_EOL;
+
     }
 
 
@@ -48,7 +51,7 @@ class Router
     public function resolve()
     {
 //        var_dump($this->routes);
-        var_dump($_SERVER);
+        var_dump($this->request->getPath());
         exit;
 
     }
