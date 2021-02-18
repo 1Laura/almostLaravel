@@ -35,12 +35,12 @@ class Router
      * @var Request
      */
     public Request $request;
+    public Response $response;
 
-
-    public function __construct($request)
+    public function __construct($request, $response)
     {
         $this->request = $request;
-//        echo "This is Router constructor" . PHP_EOL;
+        $this->response = $response;
     }
 
 
@@ -70,7 +70,8 @@ class Router
 
         if ($callback === false):
             //404
-            Application::$app->response->setResponseCode(404);
+            $this->response->setResponseCode(404);
+//            Application::$app->response->setResponseCode(404);
             echo "Page doesnt exists";
             die();
         endif;
