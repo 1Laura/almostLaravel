@@ -21,20 +21,27 @@ class Application
      *
      * @var Router
      */
+    public static string $ROOT_DIR;
     public Router $router;
     public Request $request;
+    public Response $response;
+    //a way to get this app's properties and methods where we need them
+    public static Application $app;
 
-    public function __construct()
+    public function __construct($rootPath)
     {
-//        echo "This is Application constructor";
+        //static property assignment
+        self::$ROOT_DIR = $rootPath;
+        self::$app = $this;
+        $this->response = new Response();
         $this->request = new Request();
-        $this->router = new Router($this->request);
+        $this->router = new Router($this->request, $this->response);
     }
 
 
     public function run()
     {
-        $this->router->resolve();
+        echo $this->router->resolve();
     }
 
 }

@@ -1,18 +1,19 @@
 <?php
+
 require_once '../vendor/autoload.php';
 
 use app\core\Application;
 
-$app = new Application();
+//var_dump(dirname(__DIR__));
+//exit();
 
 
-$app->router->get('/', function () {
-    return "this is home page";
-});
+$app = new Application(dirname(__DIR__));
 
-//
-$app->router->get('/about', function () {
-    return "this is about page";
-});
+
+$app->router->get('/', 'home');
+
+$app->router->get('/about', 'about');
+
 
 $app->run();
