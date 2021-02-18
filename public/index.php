@@ -1,10 +1,11 @@
 <?php
+
 require_once '../vendor/autoload.php';
 
 use app\core\Application;
 
 //var_dump(dirname(__DIR__));
-exit();
+//exit();
 
 
 $app = new Application(dirname(__DIR__));
