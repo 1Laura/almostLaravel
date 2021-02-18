@@ -82,9 +82,8 @@ class Router
         if ($callback === false):
             //404
             $this->response->setResponseCode(404);
-//            Application::$app->response->setResponseCode(404);
-            echo "Page doesnt exists";
-            die();
+            //Application::$app->response->setResponseCode(404);
+            return $this->renderView('_404');
         endif;
 
         //if our callback value is string
@@ -94,7 +93,6 @@ class Router
         endif;
 
         // page does exist we call user function
-
         return call_user_func($callback);
     }
 
