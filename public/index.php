@@ -2,6 +2,7 @@
 
 require_once '../vendor/autoload.php';
 
+use app\controller\SiteController;
 use app\core\Application;
 
 //var_dump(dirname(__DIR__));
@@ -18,8 +19,6 @@ $app->router->get('/about', 'about');
 $app->router->get('/contact', 'contact');
 
 //we create post path
-$app->router->post('/contact', function () {
-    return "Handling contact form Post request";
-});
+$app->router->post('/contact', [SiteController::class, 'handleContact']);
 
 $app->run();

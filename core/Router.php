@@ -69,7 +69,7 @@ class Router
     {
         $path = $this->request->getPath();
         $method = $this->request->getMethod();
-//
+
 //        var_dump($this->routes);
 //        exit();
 //        var_dump($path);
