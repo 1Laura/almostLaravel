@@ -102,11 +102,11 @@ class Router
      * @param string $view
      * @return string|string[]
      */
-    public function renderView(string $view)
+    public function renderView(string $view, array $params = [])
     {
 //        include_once __DIR__ . "/../view/$view.php";
         $layout = $this->layoutContent();
-        $page = $this->pageContent($view);
+        $page = $this->pageContent($view, $params);
 //        include_once Application::$ROOT_DIR . "/view/$view.php";
 //        var_dump($layout);
         // take layout and replace the {{content}} with the $page content
@@ -132,8 +132,19 @@ class Router
      * @param $view
      * @return false|string
      */
-    protected function pageContent($view)
+    protected function pageContent($view, $params)
     {
+        //smart way of creating variables dynamically
+        // $name = $params['name'];
+
+        foreach ($params as $key => $value) {
+            $$key = $value;
+            var_dump($$key);
+        }
+        var_dump($params);
+//        exit();
+
+
         //start buffering
         ob_start();
         include_once Application::$ROOT_DIR . "/view/$view.php";
