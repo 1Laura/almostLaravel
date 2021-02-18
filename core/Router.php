@@ -84,16 +84,49 @@ class Router
         return call_user_func($callback);
     }
 
+    /**
+     * Renders the page and applies the layout
+     *
+     * @param string $view
+     * @return string|string[]
+     */
     public function renderView(string $view)
     {
-
 //        include_once __DIR__ . "/../view/$view.php";
-        include_once Application::$ROOT_DIR . "/view/$view.php";
+        $layout = $this->layoutContent();
+        $page = $this->pageContent($view);
+//        include_once Application::$ROOT_DIR . "/view/$view.php";
+//        var_dump($layout);
+        // take layout and replace the {{content}} with the $page content
+        return str_replace('{{content}}', $page, $layout);
+
     }
 
+    /**
+     * Returns the layout HTML content
+     * @return false|string
+     */
     protected function layoutContent()
     {
+        //start buffering
+        ob_start();
         include_once Application::$ROOT_DIR . "/view/layout/main.php";
+        //stop and return buffering
+        return ob_get_clean();
+    }
+
+    /**
+     * Returns only the given page HTML content
+     * @param $view
+     * @return false|string
+     */
+    protected function pageContent($view)
+    {
+        //start buffering
+        ob_start();
+        include_once Application::$ROOT_DIR . "/view/$view.php";
+        //stop and return buffering
+        return ob_get_clean();
     }
 
 
