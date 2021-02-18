@@ -69,6 +69,8 @@ class Router
         //if there is no such route added, we say not exist
 
         if ($callback === false):
+            //404
+            Application::$app->response->setResponseCode(404);
             echo "Page doesnt exists";
             die();
         endif;
