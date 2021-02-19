@@ -4,6 +4,7 @@ require_once '../vendor/autoload.php';
 
 use app\controller\SiteController;
 use app\core\Application;
+use app\core\AuthController;
 
 //var_dump(dirname(__DIR__));
 //exit();
@@ -20,5 +21,13 @@ $app->router->get('/contact', [SiteController::class, 'contact']);
 
 //we create post path
 $app->router->post('/contact', [SiteController::class, 'handleContact']);
+
+
+//routes for login and register
+$app->router->get('/login', [AuthController::class, 'login']);
+$app->router->post('/login', [AuthController::class, 'login']);
+
+$app->router->get('/register', [AuthController::class, 'register']);
+$app->router->post('/register', [AuthController::class, 'register']);
 
 $app->run();
