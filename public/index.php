@@ -15,7 +15,7 @@ $app = new Application(dirname(__DIR__));
 $app->router->get('/', [SiteController::class, 'home']);
 
 $app->router->get('/about', [SiteController::class, 'about']);
-
+//$app->router->get('/about', 'about');
 $app->router->get('/contact', [SiteController::class, 'contact']);
 
 //we create post path

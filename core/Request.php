@@ -42,4 +42,31 @@ class Request
         return strtolower($_SERVER['REQUEST_METHOD']);
     }
 
+
+    /**
+     * Sanitize get and post arrays with html special chars
+     *
+     * @return array
+     */
+    public function getBody()
+    {
+        //store clean values
+        $body = [];
+
+        //what type of request
+        if ($this->getMethod() === 'post') {
+            foreach ($_POST as $key => $value) {
+                $body[$key] = filter_input(INPUT_POST, $key, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            }
+        }
+
+        if ($this->getMethod() === 'get') {
+            foreach ($_GET as $key => $value) {
+                $body[$key] = filter_input(INPUT_GET, $key, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            }
+        }
+
+        return $body;
+    }
+
 }
