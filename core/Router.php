@@ -87,10 +87,16 @@ class Router
         endif;
 
         //if our callback value is string
-        //$app->router->get('/about','about);
         if (is_string($callback)) :
             return $this->renderView($callback);
         endif;
+        //if our callback is array, we handle it with class instance
+        if (is_array($callback)) {
+            $instance = new $callback[0];
+            $callback[0] = $instance;
+
+        }
+
 
         // page does exist we call user function
         return call_user_func($callback);
