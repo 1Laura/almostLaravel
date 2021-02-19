@@ -23,7 +23,7 @@ class Router
      *  ],
      *  ['post']=>[
      *      ['/'=>function return,],
-     *      ['/about'=>function return,]
+     *      ['/contact'=>function return,]
      *  ],
      *
      * ];
@@ -53,12 +53,23 @@ class Router
         $this->routes['get'][$path] = $callback;
     }
 
+    /**
+     * This creates post path and handling in routes array
+     *
+     * @param $path
+     * @param $callback
+     */
+    public function post($path, $callback)
+    {
+        $this->routes['post'][$path] = $callback;
+    }
+
 
     public function resolve()
     {
         $path = $this->request->getPath();
         $method = $this->request->getMethod();
-//
+
 //        var_dump($this->routes);
 //        exit();
 //        var_dump($path);
@@ -71,9 +82,8 @@ class Router
         if ($callback === false):
             //404
             $this->response->setResponseCode(404);
-//            Application::$app->response->setResponseCode(404);
-            echo "Page doesnt exists";
-            die();
+            //Application::$app->response->setResponseCode(404);
+            return $this->renderView('_404');
         endif;
 
         //if our callback value is string
@@ -83,7 +93,6 @@ class Router
         endif;
 
         // page does exist we call user function
-
         return call_user_func($callback);
     }
 
@@ -93,11 +102,11 @@ class Router
      * @param string $view
      * @return string|string[]
      */
-    public function renderView(string $view)
+    public function renderView(string $view, array $params = [])
     {
 //        include_once __DIR__ . "/../view/$view.php";
         $layout = $this->layoutContent();
-        $page = $this->pageContent($view);
+        $page = $this->pageContent($view, $params);
 //        include_once Application::$ROOT_DIR . "/view/$view.php";
 //        var_dump($layout);
         // take layout and replace the {{content}} with the $page content
@@ -123,8 +132,19 @@ class Router
      * @param $view
      * @return false|string
      */
-    protected function pageContent($view)
+    protected function pageContent($view, $params)
     {
+        //smart way of creating variables dynamically
+        // $name = $params['name'];
+
+        foreach ($params as $key => $value) {
+            $$key = $value;
+            var_dump($$key);
+        }
+        var_dump($params);
+//        exit();
+
+
         //start buffering
         ob_start();
         include_once Application::$ROOT_DIR . "/view/$view.php";
