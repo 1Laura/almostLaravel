@@ -52,7 +52,7 @@ class SiteController extends Controller
      */
     public function handleContact()
     {
-        return "Handling form site controller";
+        return "Handling form site controller handleContact method";
     }
 
 }
