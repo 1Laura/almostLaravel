@@ -32,6 +32,11 @@
                 <a class="nav-link" href="/about">About</a>
                 <a class="nav-link" href="/contact">Contact</a>
             </div>
+            <div class="navbar-nav ml-auto">
+                <a class="nav-link" href="/login">Login</a>
+                <a class="nav-link" href="/register">Register</a>
+
+            </div>
         </div>
     </div>
 </nav>
