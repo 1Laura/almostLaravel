@@ -139,9 +139,9 @@ class Router
 
         foreach ($params as $key => $value) {
             $$key = $value;
-            var_dump($$key);
+//            var_dump($$key);
         }
-        var_dump($params);
+//        var_dump($params);
 //        exit();
 
 
