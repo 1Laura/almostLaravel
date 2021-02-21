@@ -14,6 +14,8 @@ class AuthController extends Controller
 
     public function login()
     {
+        //have abillity to change layout
+        $this->setLayout('auth');
         return $this->render('login');
 
     }
@@ -21,6 +23,7 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         if ($request->method() === 'get') {
+            $this->setLayout('auth');
             return $this->render('register');
         }
         return "validating form";
