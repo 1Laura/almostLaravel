@@ -13,6 +13,14 @@ namespace app\core;
  */
 class Controller
 {
+    public string $layout = 'main';
+
+    public function setLayout(string $layout)
+    {
+        $this->layout = $layout;
+    }
+
+
     /**
      * We render the view with params
      *
@@ -20,7 +28,7 @@ class Controller
      * @param array $params
      * @return string|string[]
      */
-    public function render($view, $params=[])
+    public function render($view, $params = [])
     {
         return Application::$app->router->renderView($view, $params);
 
