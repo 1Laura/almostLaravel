@@ -20,11 +20,11 @@ $config = [
     ]
 ];
 
-var_dump($config);
-exit();
+//var_dump($config);
+//exit();
 
 
-$app = new Application(dirname(__DIR__));
+$app = new Application(dirname(__DIR__), $config);
 
 
 $app->router->get('/', [SiteController::class, 'home']);
