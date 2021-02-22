@@ -11,6 +11,12 @@ namespace app\core;
  */
 class AuthController extends Controller
 {
+    public Validation $vld;
+
+    public function __construct()
+    {
+        $this->vld = new Validation();
+    }
 
     public function login()
     {
@@ -46,6 +52,20 @@ class AuthController extends Controller
         if ($request->isPost()) :
             //request is post and we need to pull user data
             $data = $request->getBody();
+
+            // Validate name
+            $data['errors']['nameErr'] = $this->vld->validateName($data['name']);
+
+            // Validate email
+//            $data['errors']['emailErr'] = $this->vld->validateEmail($data['email'], $this->userModel);
+            $data['errors']['emailErr'] = $this->vld->validateEmail($data['email']);
+
+            // Validate password, nuo 4 iki 10 simboliu
+            $data['errors']['passwordErr'] = $this->vld->validatePassword($data['password'], 4, 10);
+
+            // Validate confirmPassword
+            $data['errors']['confirmPasswordErr'] = $this->vld->validateConfirmPassword($data['confirmPassword']);
+
 
 //            var_dump($data);
 //            exit();
