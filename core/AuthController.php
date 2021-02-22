@@ -14,16 +14,22 @@ class AuthController extends Controller
 
     public function login()
     {
+        //have abillity to change layout
+        $this->setLayout('auth');
         return $this->render('login');
 
     }
 
     public function register(Request $request)
     {
-        if ($request->method() === 'get') {
+        if ($request->isGet()) :
+            $this->setLayout('auth');
             return $this->render('register');
-        }
-        return "validating form";
+        endif;
+
+        if ($request->isPost()) :
+            return "Validating form";
+        endif;
     }
 
 

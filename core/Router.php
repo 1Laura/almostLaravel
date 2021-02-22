@@ -93,8 +93,8 @@ class Router
         //if our callback is array, we handle it with class instance
         if (is_array($callback)) {
             $instance = new $callback[0];
-            $callback[0] = $instance;
-
+            Application::$app->controller = $instance;
+            $callback[0] = Application::$app->controller;
         }
         // page does exist we call user function
         return call_user_func($callback, $this->request);
@@ -124,9 +124,11 @@ class Router
      */
     protected function layoutContent()
     {
+        //controller->layout yra savybe
+        $layout = Application::$app->controller->layout;
         //start buffering
         ob_start();
-        include_once Application::$ROOT_DIR . "/view/layout/main.php";
+        include_once Application::$ROOT_DIR . "/view/layout/$layout.php";
         //stop and return buffering
         return ob_get_clean();
     }
