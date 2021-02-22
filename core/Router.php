@@ -97,6 +97,7 @@ class Router
             $callback[0] = Application::$app->controller;
         }
         // page does exist we call user function
+        // callback -> koki controlleri ir koki metoda paleisti
         return call_user_func($callback, $this->request);
     }
 

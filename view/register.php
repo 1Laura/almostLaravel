@@ -1,17 +1,56 @@
-<div class="container">
-    <h1>Register page</h1>
 
-    <form action="" method="post">
-        <div class="form-group mb-3">
-            <label for="email" class="form-label">Email address</label>
-            <input type="text" name="email" class="form-control" id="email" placeholder="name@example.com">
+<!--    from myshare-->
+    <div class="row">
+        <div class="col-lg-6 mx-auto">
+            <div class="card card-body bg-light mt-5">
+<!--                --><?php //flash('registerFail'); ?>
+                <h2>Create an account</h2>
+                <p>PLease fill in the form to register with us</p>
+                <form action="" method="post">
+                    <div class="form-group">
+                        <label for="name">Name: <sup>*</sup></label>
+                        <input type="text" name="name" id="name"
+                               class="<?php echo !empty($errors['nameErr']) ? 'is-invalid' : ''; ?> form-control form-control-lg"
+                               value="<?php echo $name; ?>">
+                        <span class="invalid-feedback"><?php echo $errors['nameErr']; ?></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email: <sup>*</sup></label>
+                        <input type="text" name="email" id="email"
+                               class="<?php echo !empty($errors['emailErr']) ? 'is-invalid' : ''; ?> form-control form-control-lg"
+                               value="<?php echo $email; ?>">
+                        <span class="invalid-feedback"><?php echo $errors['emailErr']; ?></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password: <sup>*</sup></label>
+                        <input type="password" name="password" id="password"
+                               class="<?php echo !empty($errors['passwordErr']) ? 'is-invalid' : ''; ?> form-control form-control-lg"
+                               value="<?php echo $password; ?>">
+                        <span class="invalid-feedback"><?php echo $errors['passwordErr']; ?></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm password: <sup>*</sup></label>
+                        <input type="password" name="confirmPassword" id="confirmPassword"
+                               class="<?php echo !empty($errors['confirmPasswordErr']) ? 'is-invalid' : ''; ?> form-control form-control-lg"
+                               value="<?php echo $confirmPassword; ?>">
+                        <span class="invalid-feedback"><?php echo $errors['confirmPasswordErr']; ?></span>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col">
+                            <input type="submit" class="btn btn-secondary w-100" value="Register">
+                        </div>
+                        <div class="col">
+                            <a href="/login" class="btn btn-light w-100">Have an
+                                account? Login</a>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="form-group mb-3">
-            <label for="userText" class="form-label">Example textarea</label>
-            <textarea class="form-control" name="userText" id="userText" rows="3"></textarea>
-        </div>
+    </div>
+<!--    end myshare-->
 
-
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-</div>
