@@ -29,6 +29,11 @@ class Request
         if ($questionPosition !== false) :
             $path = substr($path, 0, $questionPosition);
         endif;
+
+        //if user entered address with stash on the right we remove it
+        if (strlen($path) > 1) {
+            $path = rtrim($path, '/');
+        }
         return $path;
     }
 
