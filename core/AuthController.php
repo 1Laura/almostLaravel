@@ -3,6 +3,8 @@
 
 namespace app\core;
 
+use app\model\UserModel;
+
 /**
  * Responsible for handling login and register
  *
@@ -12,10 +14,12 @@ namespace app\core;
 class AuthController extends Controller
 {
     public Validation $vld;
+    protected UserModel $userModel;
 
     public function __construct()
     {
         $this->vld = new Validation();
+        $this->userModel = new UserModel();
     }
 
     public function login()
@@ -57,8 +61,8 @@ class AuthController extends Controller
             $data['errors']['nameErr'] = $this->vld->validateName($data['name']);
 
             // Validate email
-//            $data['errors']['emailErr'] = $this->vld->validateEmail($data['email'], $this->userModel);
-            $data['errors']['emailErr'] = $this->vld->validateEmail($data['email']);
+            $data['errors']['emailErr'] = $this->vld->validateEmail($data['email'], $this->userModel);
+//            $data['errors']['emailErr'] = $this->vld->validateEmail($data['email']);
 
             // Validate password, nuo 4 iki 10 simboliu
             $data['errors']['passwordErr'] = $this->vld->validatePassword($data['password'], 4, 10);
@@ -77,7 +81,7 @@ class AuthController extends Controller
                     //set flash message
 //                    flash('registerSuccess', 'You have registered successfully');
 //                    header("Location: " . URLROOT . "/users/login");
-                    redirect('/login');
+//                    redirect('/login');
                 } else {
                     die('something went wrong in adding user to db');
                 }

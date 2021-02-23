@@ -6,11 +6,6 @@ namespace app\core;
 
 class Database
 {
-    // connection variables(is config failo)
-    private $host = DB_HOST;
-    private $user = DB_USER;
-    private $password = DB_PASS;
-    private $dbName = DB_NAME;
 
     // some local properties
     // we store our connection
@@ -19,27 +14,29 @@ class Database
     private $stmt;
     private $error;
 
-    public function __construct()
+    public function __construct($config)//config masyvas
     {
-        // set dns(kintamasis kuriame issaugom host ir duomenu bases name)
-        $dns = "mysql:host=$this->host;dbname=$this->dbName;";
+        $dsn = $config['dsn'];
+        $user = $config['user'];
+        $password = $config['password'];
 
         // set some connection options
         $options = [
-            PDO::ATTR_PERSISTENT => true,
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+            \PDO::ATTR_PERSISTENT => true,
+            \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
         ];
 
         // create PDO instance
         try {
             // if we have error here
             // connect to db
-            $this->dbh = new PDO($dns, $this->user, $this->password, $options);
+            $this->dbh = new \PDO($dsn, $user, $password, $options);
         } catch (PDOException $e) {
             // we catch error here
             $this->error = $e->getMessage();
             echo $this->error;
         }
+
     }
 
     // Prepare statements with query====================================================================================
@@ -57,16 +54,16 @@ class Database
             //check what type is value
             switch (true) {
                 case is_int($value):
-                    $type = PDO::PARAM_INT;
+                    $type = \PDO::PARAM_INT;
                     break;
                 case is_bool($value):
-                    $type = PDO::PARAM_BOOL;
+                    $type = \PDO::PARAM_BOOL;
                     break;
                 case is_null($value):
-                    $type = PDO::PARAM_NULL;
+                    $type = \PDO::PARAM_NULL;
                     break;
                 default:
-                    $type = PDO::PARAM_STR;
+                    $type = \PDO::PARAM_STR;
             }
         }
         // Bind value
@@ -86,7 +83,7 @@ class Database
     {
         $this->execute();
         // PDO::FETCH_OBJ $result[1]->id
-        return $this->stmt->fetchAll(PDO::FETCH_OBJ);
+        return $this->stmt->fetchAll(\PDO::FETCH_OBJ);
     }
 
     // method to return single row of data==============================================================================
@@ -94,7 +91,7 @@ class Database
     {
         $this->execute();
         // PDO::FETCH_OBJ $result[1]->id
-        return $this->stmt->fetch(PDO::FETCH_OBJ);
+        return $this->stmt->fetch(\PDO::FETCH_OBJ);
     }
 
     // method to get back number of rows================================================================================

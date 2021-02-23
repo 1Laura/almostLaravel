@@ -4,13 +4,16 @@
 namespace app\model;
 
 
+use app\core\Application;
+use app\core\Database;
+
 class UserModel
 {
-    private $db;
+    private Database $db;
 
     public function __construct()
     {
-        $this->db = new Database;
+        $this->db = Application::$app->db;
     }
 
     // finds user by given email========================================================================================
