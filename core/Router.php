@@ -79,6 +79,7 @@ class Router
         $callback = $this->routes[$method][$path] ?? false;
         //if there is no such route added, we say not exist
 
+
         if ($callback === false):
             //404
             $this->response->setResponseCode(404);
@@ -126,7 +127,12 @@ class Router
     protected function layoutContent()
     {
         //controller->layout yra savybe
-        $layout = Application::$app->controller->layout;
+        if (isset(Application::$app->controller)) :
+            $layout = Application::$app->controller->layout;
+        else :
+            $layout = 'main';
+        endif;
+
         //start buffering
         ob_start();
         include_once Application::$ROOT_DIR . "/view/layout/$layout.php";
