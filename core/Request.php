@@ -69,7 +69,6 @@ class Request
 
     }
 
-
     /**
      * Sanitize get and post arrays with html special chars
      *
@@ -96,6 +95,16 @@ class Request
         }
 
         return $body;
+    }
+
+
+    /**
+     * Simple way to redirect to a location
+     * @param string $whereTo
+     */
+    public function redirect($whereTo)
+    {
+        header("Location: $whereTo");
     }
 
 }
