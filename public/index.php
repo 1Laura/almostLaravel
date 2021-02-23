@@ -50,7 +50,7 @@ $app->router->get('/logout', [AuthController::class, 'logout']);
 
 // sukuriam routa, nurodom koks kontrolleris valdys
 $app->router->get('/posts', [PostsController::class, 'index']);
-$app->router->get('/post/{id}', [PostsController::class, 'post']);
+$app->router->get('/post/1', [PostsController::class, 'post']);
 
 
 

@@ -32,6 +32,14 @@ class PostsController extends Controller
     }
 
 
+    public function post()
+    {
+        $data = [];
+        return $this->render('posts/singlePost', $data);
+
+    }
+
+
 }
 
 

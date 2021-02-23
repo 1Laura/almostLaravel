@@ -20,7 +20,7 @@
                     <h4 class="card-title"><?php echo $post->title ?></h4>
                     <p class="bg-light p-2 mb-3"> Written By <?php echo $post->name ?></p>
                     <p class="card-text"><?php echo $post->body ?></p>
-                    <a href="<?php echo '/posts/show/' . $post->postId; ?>" class="card-link">Read more</a>
+                    <a href="<?php echo '/post/' . $post->postId; ?>" class="card-link">Read more</a>
                 </div>
                 <div class="card-footer">Created at: <?php echo $post->postCreated ?></div>
             </div>
