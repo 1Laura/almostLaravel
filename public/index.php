@@ -45,6 +45,7 @@ $app->router->post('/login', [AuthController::class, 'login']);
 $app->router->get('/register', [AuthController::class, 'register']);
 $app->router->post('/register', [AuthController::class, 'register']);
 
+// sukuriam routa, nurodom koks kontrolleris valdys
 $app->router->get('/posts', [PostsController::class, 'index']);
 $app->router->get('/post/{id}', [PostsController::class, 'post']);
 
