@@ -50,6 +50,19 @@ class Router
      */
     public function get($path, $callback)
     {
+        //   12345678910
+        //   '/post/{id}'
+        if (strpos($path, '{')) {
+            $startPos = strpos($path, '{');
+            $endPos = strpos($path, '}');
+            $argName = substr($path, $startPos + 1, $endPos - $startPos - 1);
+
+            //callback yra masyvas
+            $callback[] = $argName;
+            $path = substr($path, $startPos - 1);
+//            var_dump($path);
+//            exit();
+        }
         $this->routes['get'][$path] = $callback;
     }
 
@@ -70,15 +83,14 @@ class Router
         $path = $this->request->getPath();
         $method = $this->request->method();
 
-//        var_dump($this->routes);
-//        exit();
 //        var_dump($path);
 //        var_dump($method);
 
         //trying to run a route from routes array
         $callback = $this->routes[$method][$path] ?? false;
         //if there is no such route added, we say not exist
-
+//        var_dump( $callback);
+//        exit();
 
         if ($callback === false):
             //404
