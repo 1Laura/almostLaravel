@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-lg-6 mx-auto">
         <div class="car card-body bg-light mt-5">
-<!--            --><?php //flash('registerSuccess'); ?>
+            <!--            --><?php //flash('registerSuccess'); ?>
             <h2>Login</h2>
             <p>PLease fill in the form to register with us</p>
             <form action="" method="post">
