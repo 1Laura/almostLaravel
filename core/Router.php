@@ -58,8 +58,8 @@ class Router
             $argName = substr($path, $startPos + 1, $endPos - $startPos - 1);
 
             //callback yra masyvas
-            $callback[] = $argName;
-            $path = substr($path, $startPos - 1);
+            $callback['urlParamName'] = $argName;
+            $path = substr($path, 0, $startPos - 1);
 //            var_dump($path);
 //            exit();
         }
@@ -87,9 +87,11 @@ class Router
 //        var_dump($method);
 
         //trying to run a route from routes array
+        //ar yra nusetintas path
         $callback = $this->routes[$method][$path] ?? false;
+
         //if there is no such route added, we say not exist
-//        var_dump( $callback);
+//        var_dump($this->routes);
 //        exit();
 
         if ($callback === false):
@@ -103,15 +105,31 @@ class Router
         if (is_string($callback)) :
             return $this->renderView($callback);
         endif;
+
         //if our callback is array, we handle it with class instance
+        //jei tai yra masyvas, padarom nauja instansa is callback 0
+        //
         if (is_array($callback)) {
             $instance = new $callback[0];
             Application::$app->controller = $instance;
             $callback[0] = Application::$app->controller;
+
+            //check if we have url arguments in callback array
+            if (isset($callback['urlParamName'])) {
+                //          0 => string 'app\controller\PostsController' (length=30)
+                //          1 => string 'post' (length=4)
+                //          'urlParamName' => string 'id' (length=2)
+                $urlParamName = $callback['urlParamName'];
+                //make callback array with 2 members
+                array_splice($callback, 2, 1);
+
+            }
         }
+//        var_dump($callback);
+
         // page does exist we call user function
-        // callback -> koki controlleri ir koki metoda paleisti
-        return call_user_func($callback, $this->request);
+        // callback -> koki controlleri ir koki metoda paleisti, po kablelio yra argumentai
+        return call_user_func($callback, $this->request, $urlParamName ?? null);
     }
 
     /**
