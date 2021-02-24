@@ -2,6 +2,8 @@
 
 require_once '../vendor/autoload.php';
 
+// cia galima isitraukti helperiu koki kataloga
+
 use app\controller\PostsController;
 use app\controller\SiteController;
 use app\core\Application;
