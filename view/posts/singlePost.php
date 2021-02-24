@@ -14,10 +14,10 @@
 <!--show this only if this post belongs to this user-->
 <?php //if ($_SESSION['userId'] === $data['post']->userId) : ?>
 <hr>
-<a href="<?php echo "/posts/edit/" . $post->postId; ?>" class="btn btn-secondary"><i
+<a href="<?php echo "/post/edit/" . $post->postId; ?>" class="btn btn-secondary"><i
             class="fa fa-pencil"></i> EDIT </a>
 
-<form action="<?php echo '/posts/delete/' . $post->postId ?>" method="post" class="float-end">
+<form action="<?php echo '/post/delete/' . $post->postId ?>" method="post" class="float-end">
     <button type="submit" class="btn btn-danger"><i class="fa fa-close"></i> DELETE</button>
 </form>
 <?php //endif; ?>
