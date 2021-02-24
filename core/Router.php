@@ -86,6 +86,16 @@ class Router
 //        var_dump($path);
 //        var_dump($method);
 
+        //path = "/post/1" take argument value1
+        //path = "/post" skip path argument take
+        //extract 1
+
+        $pathArr = explode('/', ltrim($path, '/'));
+        if (count($pathArr) > 1) {
+            $path = '/' . $pathArr[0];
+            $urlParam['value'] = $pathArr[1];
+        }
+
         //trying to run a route from routes array
         //ar yra nusetintas path
         $callback = $this->routes[$method][$path] ?? false;
@@ -119,7 +129,7 @@ class Router
                 //          0 => string 'app\controller\PostsController' (length=30)
                 //          1 => string 'post' (length=4)
                 //          'urlParamName' => string 'id' (length=2)
-                $urlParamName = $callback['urlParamName'];
+                $urlParam['name'] = $callback['urlParamName'];
                 //make callback array with 2 members
                 array_splice($callback, 2, 1);
 
@@ -129,7 +139,10 @@ class Router
 
         // page does exist we call user function
         // callback -> koki controlleri ir koki metoda paleisti, po kablelio yra argumentai
-        return call_user_func($callback, $this->request, $urlParamName ?? null);
+        // $urlParam = [
+        //'value'=> 32,
+        //'name'=>]
+        return call_user_func($callback, $this->request, $urlParam ?? null);
     }
 
     /**
@@ -179,7 +192,7 @@ class Router
     {
         //smart way of creating variables dynamically
         // $name = $params['name'];
-
+        //
         foreach ($params as $key => $value) {
             $$key = $value;
 //            var_dump($$key);
