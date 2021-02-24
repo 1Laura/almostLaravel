@@ -35,13 +35,13 @@
 
             <!--when not logged in-->
             <?php if (!\app\core\Session::isUserLoggedIn()): ?>
-                <div class="navbar-nav ml-auto">
+                <div class="navbar-nav float-end">
                     <a class="nav-link" href="/login">Login</a>
                     <a class="nav-link" href="/register">Register</a>
                 </div>
             <?php else: ?>
                 <!--when looged in-->
-                <div class="navbar-nav ml-auto">
+                <div class="navbar-nav float-end">
                     <a class="nav-link" disabled href="#"><?php echo $_SESSION['userEmail']; ?></a>
                     <a class="nav-link" href="/logout">Logout</a>
                 </div>

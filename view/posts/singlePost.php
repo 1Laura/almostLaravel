@@ -17,7 +17,7 @@
 <a href="<?php echo "/posts/edit/" . $post->postId; ?>" class="btn btn-secondary"><i
             class="fa fa-pencil"></i> EDIT </a>
 
-<form action="<?php echo '/posts/delete/' . $post->postId ?>" method="post" class="pull-right">
+<form action="<?php echo '/posts/delete/' . $post->postId ?>" method="post" class="float-end">
     <button type="submit" class="btn btn-danger"><i class="fa fa-close"></i> DELETE</button>
 </form>
 <?php //endif; ?>
