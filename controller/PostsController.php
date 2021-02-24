@@ -32,14 +32,20 @@ class PostsController extends Controller
     }
 
 
-    public function post(Request $request, $urlParamName = null)
+    public function post(Request $request, $urlParam = null)
     {
-        $data = [
-            'urlParamName' => $urlParamName
-        ];
+        if ($urlParam['value']) {
+            $data = [
+                $urlParam['name'] => $urlParam['value']
+            ];
 
-        return $this->render('posts/singlePost', $data);
+            //get post with id  = $urlParam['value']
 
+            // serve this post details
+
+            return $this->render('posts/singlePost', $data);
+        }
+        $request->redirect('/posts');
     }
 
 
