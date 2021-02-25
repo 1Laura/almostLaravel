@@ -86,16 +86,6 @@ class Router
 //        var_dump($path);
 //        var_dump($method);
 
-        //path = "/post/1" take argument value1
-        //path = "/post" skip path argument take
-        //extract 1
-
-        $pathArr = explode('/', ltrim($path, '/'));
-        if (count($pathArr) > 1) {
-            $path = '/' . $pathArr[0];
-            $urlParam['value'] = $pathArr[1];
-        }
-
         //trying to run a route from routes array
         //ar yra nusetintas path
         $callback = $this->routes[$method][$path] ?? false;
@@ -105,10 +95,34 @@ class Router
 //        exit();
 
         if ($callback === false):
-            //404
-            $this->response->setResponseCode(404);
-            //Application::$app->response->setResponseCode(404);
-            return $this->renderView('_404');
+            //path = "/post/1" take argument value1
+            //path = "/post" skip path argument take
+            //extract 1
+
+            $pathArr = explode('/', ltrim($path, '/'));
+
+//            var_dump($pathArr);
+
+            if (count($pathArr) === 2) {
+                $path = '/' . $pathArr[0];
+                $urlParam['value'] = $pathArr[1];
+            }
+
+            if (count($pathArr) === 3) {
+                $path = '/' . $pathArr[0] . '/' . $pathArr[1];
+                $urlParam['value'] = $pathArr[2];
+            }
+
+            $callback = $this->routes[$method][$path]??null;
+
+//            var_dump($path);
+            if (!isset($urlParam['value'])) {
+                //404
+                $this->response->setResponseCode(404);
+                //Application::$app->response->setResponseCode(404);
+                return $this->renderView('_404');
+            }
+
         endif;
 
         //if our callback value is string
@@ -141,7 +155,8 @@ class Router
         // callback -> koki controlleri ir koki metoda paleisti, po kablelio yra argumentai
         // $urlParam = [
         //'value'=> 32,
-        //'name'=>]
+        //'name'=> 'id'
+        //];
         return call_user_func($callback, $this->request, $urlParam ?? null);
     }
 
