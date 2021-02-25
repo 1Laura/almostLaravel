@@ -69,9 +69,48 @@ class PostsController extends Controller
         $request->redirect('/posts');
     }
 
-    public function addPost()
+    public function addPost(Request $request)
     {
-        return $this->render('posts/addPost');
+        //check if get or post
+        if ($request->isGet()) :
+            //create data
+            $data = [
+                'userId' => $_SESSION['userId'],
+                'title' => '',
+                'body' => '',
+                'errors' => [
+                    'titleErr' => '',
+                    'bodyErr' => '',
+                ],
+            ];
+            return $this->render('posts/addPost', $data);
+        endif;
+
+        if ($request->isPost()) :
+            $data = $request->getBody();
+            //validate title
+            $data['userId'] = $_SESSION['userId'];
+            if (empty($data['title'])) {
+                $data['errors']['titleErr'] = 'Please enter a title';
+            }
+            //validate body
+            if (empty($data['body'])) {
+                $data['errors']['bodyErr'] = 'Please enter a text';
+            }
+            //check if there are no errors
+            if (empty($data['errors']['titleErr']) && empty($data['errors']['bodyErr'])) {
+                if ($this->postModel->addPost($data)) {
+                    $request->redirect('/posts');
+                } else {
+                    die('something went wrong in adding post');
+                }
+            } else {
+                return $this->render('posts/addPost', $data);
+            }
+
+
+            return $this->render('posts/addPost', $data);
+        endif;
     }
 
     public function editPost(Request $request, $urlParam = null)

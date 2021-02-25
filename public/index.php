@@ -56,6 +56,9 @@ $app->router->get('/post/{id}', [PostsController::class, 'post']);
 
 //papildomas routas prideti postui
 $app->router->get('/post/add', [PostsController::class, 'addPost']);
+$app->router->post('/post/add', [PostsController::class, 'addPost']);
+
+
 
 $app->router->get('/post/edit/{id}', [PostsController::class, 'editPost']);
 

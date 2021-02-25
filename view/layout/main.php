@@ -31,6 +31,7 @@
                 <a class="nav-link" href="/">Home</a>
                 <a class="nav-link" href="/about">About</a>
                 <a class="nav-link" href="/contact">Contact</a>
+                <a class="nav-link" href="/posts">Posts</a>
             </div>
 
             <!--when not logged in-->
