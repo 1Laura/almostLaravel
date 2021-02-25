@@ -6,7 +6,7 @@
 <!--                --><?php //flash('registerFail'); ?>
                 <h2>Create an account</h2>
                 <p>PLease fill in the form to register with us</p>
-                <form action="" method="post">
+                <form action="" method="post" id="registration-form">
                     <div class="form-group">
                         <label for="name">Name: <sup>*</sup></label>
                         <input type="text" name="name" id="name"
