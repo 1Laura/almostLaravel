@@ -15,6 +15,8 @@
             integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG"
             crossorigin="anonymous"></script>
     <!--bootstrap-->
+    <scrip defer src="./js/app.js"></scrip>
+    <link rel="stylesheet" href="./css/style.css">
     <title>MVC</title>
 </head>
 <body>
