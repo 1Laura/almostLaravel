@@ -12,6 +12,7 @@ use app\core\AuthController;
 //var_dump(dirname(__DIR__));
 //exit();
 
+// env
 $dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
 $dotenv->load();
 
@@ -36,6 +37,11 @@ $app->router->get('/about', [SiteController::class, 'about']);
 //$app->router->get('/about', 'about');
 $app->router->get('/contact', [SiteController::class, 'contact']);
 
+//
+//$app->router->get('/fn', function(){
+//    return 56+74;
+//});
+
 //we create post path
 $app->router->post('/contact', [SiteController::class, 'handleContact']);
 
@@ -57,7 +63,6 @@ $app->router->get('/post/{id}', [PostsController::class, 'post']);
 //papildomas routas prideti postui
 $app->router->get('/post/add', [PostsController::class, 'addPost']);
 $app->router->post('/post/add', [PostsController::class, 'addPost']);
-
 
 
 $app->router->get('/post/edit/{id}', [PostsController::class, 'editPost']);
