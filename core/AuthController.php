@@ -77,7 +77,7 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         if ($request->isGet()) :
-//            $this->setLayout('auth');
+            $this->setLayout('auth');
             //create cata
             $data = [
                 'name' => '',
@@ -98,6 +98,7 @@ class AuthController extends Controller
         endif;
 
         if ($request->isPost()) :
+            $this->setLayout('auth');
             //request is post and we need to pull user data
             $data = $request->getBody();
 
