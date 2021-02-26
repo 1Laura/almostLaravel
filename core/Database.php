@@ -36,7 +36,7 @@ class Database
             $this->error = $e->getMessage();
             echo $this->error;
         }
-
+        $this->usersTableInit();
     }
 
     // Prepare statements with query====================================================================================
@@ -100,5 +100,24 @@ class Database
         return $this->stmt->rowCount();
     }
 
+    // kai naujas projektas
+    // sukuria lentele automatiskai
+    /**
+     * We check if there is no users table we create it
+     *
+     * Users table
+     *
+     */
+    private function usersTableInit()
+    {
+        $sql = "CREATE TABLE if not exists `users` ( `id` INT NOT NULL AUTO_INCREMENT ,
+   `name` VARCHAR(100) NOT NULL ,
+   `email` VARCHAR(150) NOT NULL ,
+   `password` VARCHAR(255) NOT NULL ,
+   `created_at` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+   PRIMARY KEY (`id`) ENGINE = InnoDB;";
+        $this->query($sql);
+        $this->execute();
+    }
 
 }
