@@ -31,9 +31,9 @@
     </div>
 </div>
 <?php
-var_dump($title);
-var_dump($body);
-var_dump($_SESSION);
+//var_dump($title);
+//var_dump($body);
+//var_dump($_SESSION);
 
 
 ?>

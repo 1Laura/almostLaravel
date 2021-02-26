@@ -71,7 +71,7 @@ class PostModel
     public function updatePost($data)
     {
         //prepare statement
-        $this->db->query("UPDATE posts SET `title`=:title, `body`=:body WHERE id=:postId");
+        $this->db->query("UPDATE posts SET `title`=:title, `body`=:body WHERE postId=:postId");
 
         //add values//priskirti reiksmes
         $this->db->bind(':title', $data['title']);
@@ -90,7 +90,7 @@ class PostModel
     public function deletePost($id)
     {
         //prepare statement
-        $this->db->query("DELETE FROM `posts` WHERE `posts`.`id` =:postId");
+        $this->db->query("DELETE FROM `posts` WHERE `posts`.`postId` =:postId");
 
         $this->db->bind(':postId', $id);
 

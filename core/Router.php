@@ -74,7 +74,15 @@ class Router
      */
     public function post($path, $callback)
     {
+        if (strpos($path, '{')):
+            $startPos = strpos($path, '{');
+            $endPos = strpos($path, '}');
+            $argName = substr($path, $startPos + 1, $endPos - $startPos - 1);
+            $callback['urlParamName'] = $argName;
+            $path = substr($path, 0, $startPos - 1);
+        endif;
         $this->routes['post'][$path] = $callback;
+
     }
 
 
@@ -101,19 +109,21 @@ class Router
 
             $pathArr = explode('/', ltrim($path, '/'));
 
-//            var_dump($pathArr);
-
+            // path = "/post/1" take argument value 1
+            // path = "/post" skip path argument take
+            // extract 1
             if (count($pathArr) === 2) {
                 $path = '/' . $pathArr[0];
                 $urlParam['value'] = $pathArr[1];
             }
 
+            // path = "/post/edit/1" take argument value 1
             if (count($pathArr) === 3) {
-                $path = '/' . $pathArr[0] . '/' . $pathArr[1];
+                $path = '/' . $pathArr[0] . "/" . $pathArr[1];
                 $urlParam['value'] = $pathArr[2];
             }
 
-            $callback = $this->routes[$method][$path]??null;
+            $callback = $this->routes[$method][$path] ?? null;
 
 //            var_dump($path);
             if (!isset($urlParam['value'])) {
@@ -122,15 +132,15 @@ class Router
                 //Application::$app->response->setResponseCode(404);
                 return $this->renderView('_404');
             }
-
         endif;
 
-        //if our callback value is string
+        // if our callback value is string
+        // $app->router->get('/about', 'about');
         if (is_string($callback)) :
             return $this->renderView($callback);
         endif;
 
-        //if our callback is array, we handle it with class instance
+        // if our callback is array we handle it whith class instance
         //jei tai yra masyvas, padarom nauja instansa is callback 0
         //
         if (is_array($callback)) {
@@ -144,12 +154,14 @@ class Router
                 //          1 => string 'post' (length=4)
                 //          'urlParamName' => string 'id' (length=2)
                 $urlParam['name'] = $callback['urlParamName'];
+//                var_dump($callback);
+
                 //make callback array with 2 members
                 array_splice($callback, 2, 1);
-
+//                var_dump($callback);
             }
         }
-//        var_dump($callback);
+
 
         // page does exist we call user function
         // callback -> koki controlleri ir koki metoda paleisti, po kablelio yra argumentai
@@ -157,7 +169,9 @@ class Router
         //'value'=> 32,
         //'name'=> 'id'
         //];
+//        var_dump($urlParam);
         return call_user_func($callback, $this->request, $urlParam ?? null);
+
     }
 
     /**

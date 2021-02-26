@@ -28,16 +28,13 @@ class PostsController extends Controller
 
         $data = [
             'posts' => $posts,
-
         ];
 
         return $this->render('posts/posts', $data);
     }
 
-
     public function post(Request $request, $urlParam = null)
     {
-
         if ($urlParam['value']) {
             $id = $urlParam['value'];
 
@@ -45,17 +42,14 @@ class PostsController extends Controller
             //get post row
             $post = $this->postModel->getPostById($id);
 
-
             //if there are no such id
             if ($post === false) {
                 return $this->render('_404');
             }
-
 //            var_dump($post);
-
             //lets get user data by userId
             $user = $this->userModel->getUserById($post->userId);
-            var_dump($user);
+//            var_dump($user);
             // serve this post details
 
             $data = [
@@ -107,21 +101,70 @@ class PostsController extends Controller
             } else {
                 return $this->render('posts/addPost', $data);
             }
-
-
             return $this->render('posts/addPost', $data);
         endif;
     }
 
     public function editPost(Request $request, $urlParam = null)
     {
-        $data = [
-            $urlParam['name'] => $urlParam['value']
-        ];
-        return $this->render('posts/editPost', $data);
+        //check if get
+        if ($request->isGet()) {
+            if ($urlParam['value']) {
+                $id = $urlParam['value'];
+                $postData = $this->postModel->getPostById($id);
+//                var_dump($postData);
+                $data = [
+                    'postId' => $id,
+                    'userId' => $_SESSION['userId'],
+                    'title' => $postData->title,
+                    'body' => $postData->body,
+                    'errors' => [
+                        'titleErr' => '',
+                        'bodyErr' => '',
+                    ],
+                ];
+                return $this->render('posts/editPost', $data);
+            }
+        }
+        //check if post
+        if ($request->isPost()) :
+            $data = $request->getBody();
+            $data['postId'] = $urlParam['value'];
+
+            //validate title
+            $data['userId'] = $_SESSION['userId'];
+            if (empty($data['title'])) {
+                $data['errors']['titleErr'] = 'Please enter a title';
+            }
+            //validate body
+            if (empty($data['body'])) {
+                $data['errors']['bodyErr'] = 'Please enter a text';
+            }
+            //check if there are no errors
+            if (empty($data['errors']['titleErr']) && empty($data['errors']['bodyErr'])) {
+                if ($this->postModel->updatePost($data)) {
+                    $request->redirect('/posts');
+                } else {
+                    die('something went wrong in updating post');
+                }
+            } else {
+                return $this->render('posts/editPost', $data);
+            }
+            return $this->render('posts/editPost', $data);
+        endif;
     }
 
 
+    public function deletePost(Request $request, $urlParam = null)
+    {
+        if ($request->isPost()) {
+            $id = $urlParam['value'];
+            if ($this->postModel->deletePost($id)) {
+                $request->redirect('/posts');
+            }
+        }
+
+    }
 }
 
 

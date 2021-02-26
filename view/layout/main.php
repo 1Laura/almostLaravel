@@ -17,7 +17,7 @@
     <!--bootstrap-->
     <scrip defer src="./js/app.js"></scrip>
     <link rel="stylesheet" href="./css/style.css">
-    <title>MVC</title>
+    <title> L A R A </title>
 </head>
 <body>
 
@@ -38,13 +38,13 @@
 
             <!--when not logged in-->
             <?php if (!\app\core\Session::isUserLoggedIn()): ?>
-                <div class="navbar-nav float-end">
+                <div class="navbar-nav ms-auto">
                     <a class="nav-link" href="/login">Login</a>
                     <a class="nav-link" href="/register">Register</a>
                 </div>
             <?php else: ?>
                 <!--when looged in-->
-                <div class="navbar-nav float-end">
+                <div class="navbar-nav ms-auto">
                     <a class="nav-link" disabled href="#"><?php echo $_SESSION['userEmail']; ?></a>
                     <a class="nav-link" href="/logout">Logout</a>
                 </div>
