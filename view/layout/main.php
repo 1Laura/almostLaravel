@@ -17,7 +17,7 @@
     <!--bootstrap-->
     <scrip defer src="./js/app.js"></scrip>
     <link rel="stylesheet" href="./css/style.css">
-    <title>MVC</title>
+    <title>L A R A</title>
 </head>
 <body>
 

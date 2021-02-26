@@ -50,12 +50,10 @@ class PostsController extends Controller
             if ($post === false) {
                 return $this->render('_404');
             }
-
 //            var_dump($post);
-
             //lets get user data by userId
             $user = $this->userModel->getUserById($post->userId);
-            var_dump($user);
+//            var_dump($user);
             // serve this post details
 
             $data = [
@@ -115,10 +113,30 @@ class PostsController extends Controller
 
     public function editPost(Request $request, $urlParam = null)
     {
+        //check if get or post
+        if ($request->isGet()) :
+            //create data
+            $data = [
+                'userId' => $_SESSION['userId'],
+                'title' => '',
+                'body' => '',
+                'errors' => [
+                    'titleErr' => '',
+                    'bodyErr' => '',
+                ],
+            ];
+            return $this->render('posts/addPost', $data);
+        endif;
+
+
         $data = [
             $urlParam['name'] => $urlParam['value']
         ];
         return $this->render('posts/editPost', $data);
+
+
+
+
     }
 
 
