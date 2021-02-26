@@ -1,6 +1,6 @@
 <div class="container">
     <h1>this is contact page</h1>
-
+    <?php var_dump($_ENV); ?>
     <form action="" method="post">
         <div class="form-group mb-3">
             <label for="email" class="form-label">Email address</label>
