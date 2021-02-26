@@ -21,3 +21,7 @@
     <button type="submit" class="btn btn-danger"><i class="fa fa-close"></i> DELETE</button>
 </form>
 <?php //endif; ?>
+
+
+<?php var_dump($post); ?>
+<?php var_dump($user); ?>

@@ -90,7 +90,7 @@ class PostModel
     public function deletePost($id)
     {
         //prepare statement
-        $this->db->query("DELETE FROM `posts` WHERE `posts`.`id` =:postId");
+        $this->db->query("DELETE FROM `posts` WHERE `posts`.`postId` =:postId");
 
         $this->db->bind(':postId', $id);
 

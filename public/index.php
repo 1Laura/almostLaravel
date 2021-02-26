@@ -66,6 +66,10 @@ $app->router->post('/post/add', [PostsController::class, 'addPost']);
 
 
 $app->router->get('/post/edit/{id}', [PostsController::class, 'editPost']);
+$app->router->post('/post/edit/{id}', [PostsController::class, 'editPost']);
 
+//sukuriam routa deletui
+$app->router->post('/post/delete/{id}', [PostsController::class, 'deletePost']);
+//$app->router->get('/post/delete/{id}', [PostsController::class, 'deletePost']);
 
 $app->run();

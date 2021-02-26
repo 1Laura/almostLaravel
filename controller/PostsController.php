@@ -28,7 +28,6 @@ class PostsController extends Controller
 
         $data = [
             'posts' => $posts,
-
         ];
 
         return $this->render('posts/posts', $data);
@@ -37,7 +36,6 @@ class PostsController extends Controller
 
     public function post(Request $request, $urlParam = null)
     {
-
         if ($urlParam['value']) {
             $id = $urlParam['value'];
 
@@ -45,17 +43,14 @@ class PostsController extends Controller
             //get post row
             $post = $this->postModel->getPostById($id);
 
-
             //if there are no such id
             if ($post === false) {
                 return $this->render('_404');
             }
-
 //            var_dump($post);
-
             //lets get user data by userId
             $user = $this->userModel->getUserById($post->userId);
-            var_dump($user);
+//            var_dump($user);
             // serve this post details
 
             $data = [
@@ -113,12 +108,28 @@ class PostsController extends Controller
         endif;
     }
 
+
     public function editPost(Request $request, $urlParam = null)
     {
         $data = [
             $urlParam['name'] => $urlParam['value']
         ];
+//        var_dump($data);
         return $this->render('posts/editPost', $data);
+    }
+
+
+    public function deletePost(Request $request, $urlParam = null)
+    {
+//        if ($request->isPost()) {
+//        $data = [
+//            $urlParam['name'] => $urlParam['value'],
+//        ];
+        $id = $urlParam['value'];
+//        exit();
+        if ($this->postModel->deletePost($id)) {
+            $request->redirect('/posts');
+        }
     }
 
 
