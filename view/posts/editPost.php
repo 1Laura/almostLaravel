@@ -1,5 +1,3 @@
-<h1>Editing post : <?php echo $id; ?></h1>
-
 <a href="/posts" class="btn btn-light my-3"><i class="fa fa-chevron-left"></i> Back</a>
 <div class="row">
     <div class="col-lg-10 mx-auto">
